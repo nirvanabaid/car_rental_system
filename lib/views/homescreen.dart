@@ -1,4 +1,5 @@
 import 'package:dbs_project/Constants/constantColors.dart';
+import 'package:dbs_project/views/addCar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -87,6 +88,8 @@ class _rentState extends State<rent> {
   DateTime? _pickupDate;
 
   DateTime? _dropDate;
+  String? _selectedPickupTime;
+  String? _selectedDropTime;
   int n=2;
 
 
@@ -128,6 +131,36 @@ class _rentState extends State<rent> {
         });
       });
     }
+
+
+
+    Future<void> _showPickupTimePicker() async {
+      final TimeOfDay? result =
+      await showTimePicker(context: context, initialTime: TimeOfDay.now());
+      if (result !=  null) {
+        setState(() {
+          _selectedPickupTime = result.format(context);
+        });
+      }
+
+    }
+
+
+    // We don't need to pass a context to the _show() function
+    // You can safety use context as below
+    Future<void> _showDropTimePicker() async {
+      final TimeOfDay? result1 =
+      await showTimePicker(context: context, initialTime: TimeOfDay.now());
+      if (result1 != null) {
+        setState(() {
+          _selectedDropTime = result1.format(context);
+        });
+      }
+    }
+
+
+
+
 
 
     return SingleChildScrollView(
@@ -215,6 +248,77 @@ class _rentState extends State<rent> {
                                           ],
                                         ):
                                         Text("Drop Date", style: TextStyle(color: text, fontSize:height*0.0178, fontWeight: FontWeight.w600))
+
+                                    )
+                                ),
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        height: height*0.09,
+                        width: width,
+                        color: background2,
+                        child: Padding(
+
+                          padding:  EdgeInsets.symmetric(vertical: height*0.01, horizontal: width*0.02),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+
+                              GestureDetector(
+                                onTap: _showPickupTimePicker,
+                                child: Container(
+                                    height: height*0.2,
+                                    width: width*0.45,
+                                    decoration: BoxDecoration(
+                                        color: background,
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    child: Center(
+                                        child: (_selectedPickupTime != null)?
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text("Pickup: ", style: TextStyle(color: text, fontSize:height*0.0178, fontWeight: FontWeight.w600),),
+                                            Text(
+                                              _selectedPickupTime!,
+                                              style: TextStyle(color: text, fontSize:height*0.0178, fontWeight: FontWeight.w400),
+                                            )
+                                          ],
+                                        ):
+                                        Text("Pickup Time", style: TextStyle(color: text, fontSize:height*0.0178, fontWeight: FontWeight.w600))
+
+                                    )
+                                ),
+                              ),
+                              SizedBox(
+                                width: width*0.03,
+                              ),
+                              GestureDetector(
+                                onTap:_showDropTimePicker,
+                                child: Container(
+                                    height: height*0.2,
+                                    width: width*0.45,
+                                    decoration: BoxDecoration(
+                                        color: background,
+                                        borderRadius: BorderRadius.circular(20)
+                                    ),
+                                    child: Center(
+                                        child: (_selectedDropTime != null)?
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Text("Drop: ", style: TextStyle(color: text, fontSize:height*0.0178, fontWeight: FontWeight.w600),),
+                                            Text(
+                                              _selectedDropTime!,
+                                              style: TextStyle(color: text, fontSize:height*0.0178, fontWeight: FontWeight.w400),
+                                            )
+                                          ],
+                                        ):
+                                        Text("Drop Time", style: TextStyle(color: text, fontSize:height*0.0178, fontWeight: FontWeight.w600))
 
                                     )
                                 ),
@@ -414,11 +518,32 @@ class lend extends StatefulWidget {
 class _lendState extends State<lend> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
 
-      ],
-    )
+    var height= MediaQuery.of(context).size.height;
+    var width= MediaQuery.of(context).size.width;
+
+    return SafeArea(
+      child: Stack(
+        children: [
+            SingleChildScrollView(child: SizedBox(child: CarGridView(n: 2,))),
+          Positioned(
+            bottom: 20,
+            right: 20,
+              child: FloatingActionButton.extended(
+                  onPressed: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => addCar()));
+                  },
+                label: Text("Add car"),
+                icon: Icon(Icons.add),
+                backgroundColor: background2,
+                hoverColor: Colors.yellowAccent,
+
+              )
+          )
+
+        ],
+      ),
+    );
   }
 }
 
