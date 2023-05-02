@@ -1,5 +1,6 @@
 import 'package:dbs_project/Constants/constantColors.dart';
 import 'package:dbs_project/views/addCar.dart';
+import 'package:dbs_project/views/carPage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -72,8 +73,11 @@ class Car {
   final String name;
   final String imageUrl;
   final String details;
+  final int cost;
+  final int late_fee;
+  final String car_number;
 
-  Car({required this.name, required this.imageUrl, required this.details});
+  Car({required this.name, required this.imageUrl, required this.details, required this.cost, required this.late_fee, required this.car_number });
 }
 
 class rent extends StatefulWidget {
@@ -436,22 +440,39 @@ class CarGridView extends StatelessWidget {
       name: 'Mercedes-Benz S-Class',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Luxury sedan',
+      cost: 1500,
+      late_fee: 200,
+      car_number: "WB 19AB 0021"
     ), Car(
       name: 'Tesla Model S',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Electric car',
+      cost: 1500,
+      late_fee: 200,
+      car_number: "WB 19AB 0021"
+
     ), Car(
       name: 'Ferrari 458 Italia',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Supercar',
-    ), Car(
+        cost: 1500,
+        late_fee: 200,
+        car_number: "WB 19AB 0021"
+    ),
+      Car(
       name: 'Ford Mustang',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Muscle car',
+        cost: 1500,
+        late_fee: 200,
+          car_number: "WB 19AB 0021"
     ), Car(
       name: 'Jeep Wrangler',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Off-road vehicle',
+        cost: 1500,
+        late_fee: 200,
+          car_number: "WB 19AB 0021"
     ),];
 
     return GridView.builder(
@@ -466,39 +487,44 @@ class CarGridView extends StatelessWidget {
         mainAxisSpacing: 10,
       ),
       itemBuilder: (ctx, index) {
-        return Container(
-          color: background2,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              elevation: 0,
-              color: background2,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Image.network(
-                      cars[index].imageUrl,
-                      fit: BoxFit.cover,
+        return GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute<void>(builder: (context) => carPage(car: cars[index],)));
+          },
+          child: Container(
+            color: background2,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 0,
+                color: background2,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Image.network(
+                        cars[index].imageUrl,
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    cars[index].name,
-                    style: TextStyle(
-                      color: text,
-                      fontSize: height*0.02,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(height: 10),
+                    Text(
+                      cars[index].name,
+                      style: TextStyle(
+                        color: text,
+                        fontSize: height*0.02,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Text(
-                    cars[index].details,
-                    style: TextStyle(
-                      fontSize: height*0.015,
-                      color: Colors.grey,
+                    SizedBox(height: 5),
+                    Text(
+                      cars[index].details,
+                      style: TextStyle(
+                        fontSize: height*0.015,
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
