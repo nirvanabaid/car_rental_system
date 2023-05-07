@@ -416,7 +416,7 @@ class _rentState extends State<rent> {
                     ],
                   ),
                 ),
-                SizedBox(child: CarGridView(n: n))
+                SizedBox(child: CarGridView(n: n, page_no: 0,))
               ],
             ),
           ),
@@ -427,8 +427,9 @@ class _rentState extends State<rent> {
 }
 
 class CarGridView extends StatelessWidget {
-  CarGridView({Key? key, required this.n}) : super(key: key);
+  CarGridView({Key? key, required this.n, required this.page_no}) : super(key: key);
   final int n;
+  final int page_no;
 
   @override
   Widget build(BuildContext context) {
@@ -436,14 +437,16 @@ class CarGridView extends StatelessWidget {
     var height= MediaQuery.of(context).size.height;
     var width= MediaQuery.of(context).size.width;
 
-    final List<Car> cars = [Car(
+    final List<Car> cars =
+    [Car(
       name: 'Mercedes-Benz S-Class',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Luxury sedan',
       cost: 1500,
       late_fee: 200,
       car_number: "WB 19AB 0021"
-    ), Car(
+    ),
+      Car(
       name: 'Tesla Model S',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Electric car',
@@ -451,7 +454,8 @@ class CarGridView extends StatelessWidget {
       late_fee: 200,
       car_number: "WB 19AB 0021"
 
-    ), Car(
+    ),
+      Car(
       name: 'Ferrari 458 Italia',
       imageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba',
       details: 'Supercar',
@@ -489,7 +493,7 @@ class CarGridView extends StatelessWidget {
       itemBuilder: (ctx, index) {
         return GestureDetector(
           onTap: (){
-            Navigator.push(context, MaterialPageRoute<void>(builder: (context) => carPage(car: cars[index],)));
+            Navigator.push(context, MaterialPageRoute<void>(builder: (context) => carPage(car: cars[index], page_no: page_no,)));
           },
           child: Container(
             color: background2,
@@ -551,7 +555,7 @@ class _lendState extends State<lend> {
     return SafeArea(
       child: Stack(
         children: [
-            SingleChildScrollView(child: SizedBox(child: CarGridView(n: 2,))),
+            SingleChildScrollView(child: SizedBox(child: CarGridView(n: 2, page_no: 1,))),
           Positioned(
             bottom: 20,
             right: 20,
@@ -584,9 +588,123 @@ class profile extends StatefulWidget {
 class _profileState extends State<profile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: background,
+    var height= MediaQuery.of(context).size.height;
+    var width= MediaQuery.of(context).size.width;
+    return SafeArea(
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: SingleChildScrollView(
+          child: Column(
 
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  padding: EdgeInsets.all(20),
+                  
+                  decoration: BoxDecoration(
+                    color: background2,
+                    borderRadius: BorderRadius.all(Radius.circular(360))
+                  ),
+                  child: Icon(
+                    Icons.person, size: height*0.15,
+                    color: highlight,
+                  ),
+                ),
+              ),
+              SizedBox(height: height*0.05),
+              Text(
+                "Name",
+                style: TextStyle(fontSize: height*0.031, fontWeight: FontWeight.bold, color: highlight),
+              ),
+              SizedBox(height: 0),
+              Container(
+                width: width,
+                padding: EdgeInsets.symmetric(vertical: height*0.01, horizontal: width*0.02),
+                decoration: BoxDecoration(
+                  color: background2,
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                child: Text(
+                  "Nirvana Baid",
+                  style: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: height*0.014),
+              Text(
+                "Email",
+                style: TextStyle(fontSize: height*0.031, fontWeight: FontWeight.bold, color: highlight),
+              ),
+              Container(
+                width: width,
+                padding: EdgeInsets.symmetric(vertical: height*0.01, horizontal: width*0.02),
+                decoration: BoxDecoration(
+                    color: background2,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child: Text(
+                  "baidnirvana@gmail.com",
+                  style: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: height*0.014),
+              Text(
+                "Phone Number",
+                style: TextStyle(fontSize:height*0.031, fontWeight: FontWeight.bold, color: highlight),
+              ),
+              Container(
+                width: width,
+                padding: EdgeInsets.symmetric(vertical: height*0.01, horizontal: width*0.02),
+                decoration: BoxDecoration(
+                    color: background2,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child: Text(
+                  "+91 9038329666",
+                  style: TextStyle(fontSize:height*0.02 , fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: height*0.014),
+              Text(
+                "Driving License Number",
+                style: TextStyle(fontSize: height*0.031, fontWeight: FontWeight.bold, color: highlight),
+              ),
+              Container(
+                width: width,
+                padding: EdgeInsets.symmetric(vertical: height*0.01, horizontal: width*0.02),
+                decoration: BoxDecoration(
+                    color: background2,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child: Text(
+                  "XXXXXXXXXXXXXXXXXXXX",
+                  style: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: height*0.014),
+              Text(
+                "Address",
+                style: TextStyle(fontSize: height*0.031, fontWeight: FontWeight.bold, color: highlight),
+              ),
+              Container(
+                width: width,
+                padding: EdgeInsets.symmetric(vertical: height*0.01, horizontal: width*0.02),
+                decoration: BoxDecoration(
+                    color: background2,
+                    borderRadius: BorderRadius.circular(10)
+                ),
+                child: Text(
+                  " 51,Dobson Road\n Howrah- 711101\n West Bengal\n India",
+                  style: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: 16.0),
+
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

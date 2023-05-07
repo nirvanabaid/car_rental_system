@@ -9,10 +9,12 @@ class carPage extends StatefulWidget {
   const carPage(
       {
         required this.car,
+        required this.page_no,
         Key? key
       }) : super(key: key);
 
   final Car car;
+  final int page_no;
 
   @override
   State<carPage> createState() => _carPageState();
@@ -135,7 +137,11 @@ class _carPageState extends State<carPage> {
                 child: SizedBox(
                   width: width,
                   child: ElevatedButton(
-                    onPressed: (){}, child: Text("BOOK", style: TextStyle(color: Colors.black, fontSize: height*0.0278, fontWeight: FontWeight.bold),),
+                    onPressed: (widget.page_no == 0)?
+                        (){
+                        }:
+                        (){},
+                    child: Text((widget.page_no == 0)? "BOOK": "DELETE VEHICLE", style: TextStyle(color: Colors.black, fontSize: height*0.0278, fontWeight: FontWeight.bold),),
                     style: ButtonStyle(
                       backgroundColor: MaterialStatePropertyAll(highlight),
                       padding: MaterialStatePropertyAll(EdgeInsets.symmetric(vertical: height*0.013))
