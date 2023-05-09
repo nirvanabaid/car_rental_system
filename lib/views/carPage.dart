@@ -139,6 +139,7 @@ class _carPageState extends State<carPage> {
                   child: ElevatedButton(
                     onPressed: (widget.page_no == 0)?
                         (){
+                        showDialog(context: context, builder: (context) => showCustomDialog(context) );
                         }:
                         (){},
                     child: Text((widget.page_no == 0)? "BOOK": "DELETE VEHICLE", style: TextStyle(color: Colors.black, fontSize: height*0.0278, fontWeight: FontWeight.bold),),
@@ -154,4 +155,99 @@ class _carPageState extends State<carPage> {
 
     );
   }
+}
+
+Dialog showCustomDialog(BuildContext c2)
+{
+  var height= MediaQuery.of(c2).size.height;
+  var width= MediaQuery.of(c2).size.width;
+  TextEditingController coupon= TextEditingController();
+  FocusNode c=FocusNode();
+
+  return Dialog(
+    elevation: 0,
+    backgroundColor: background,
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0)),
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: width*0.05, vertical: height*0.035),
+      height: height*0.4,
+      width: width,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Total Payment: ",
+                style: TextStyle(fontSize: height*0.03, color: highlight),
+              ),
+              Text("₹2000", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+            ],
+          ),
+          SizedBox(height: height*0.01,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Discount: ",
+                style: TextStyle(fontSize: height*0.03, color: highlight),
+              ),
+              Text("₹300", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+            ],
+          ),
+          SizedBox(height: height*0.02,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Net Amount: ",
+                style: TextStyle(fontSize: height*0.03, color: highlight),
+              ),
+              Text("₹1700", style: TextStyle(color: Colors.white, fontSize: height*0.025),)
+            ],
+          ),
+          SizedBox(height: height*0.04,),
+          TextField(
+            cursorColor: Colors.white,
+            style: TextStyle(color: Colors.white),
+            focusNode: c,
+            controller: coupon,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+              labelText: 'Enter Coupon Code',
+              labelStyle: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(width: 2, color: Colors.yellowAccent)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide(width: 2, color: Colors.yellow)),
+            ),
+          ),
+        SizedBox(
+          height: height*0.045,
+        ),
+        SizedBox(
+          width: width,
+          height: height*0.05,
+          child: ElevatedButton(onPressed: (){
+            Navigator.pop(c2);
+          } ,
+              child: Text("Pay Now", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold,fontSize: height*0.02),),
+            style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(highlight),
+
+            ),
+          ),
+        )
+
+        ],
+      ),
+    ),
+  );
+
 }
