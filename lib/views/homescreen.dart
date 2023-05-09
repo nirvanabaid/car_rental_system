@@ -6,6 +6,8 @@ import 'package:dbs_project/Utils/profile.dart';
 import 'package:dbs_project/Utils/rent.dart';
 import 'package:dbs_project/views/addCar.dart';
 import 'package:dbs_project/views/carPage.dart';
+import 'package:dbs_project/views/signIn.dart';
+import 'package:dbs_project/views/upcomingBookings.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -227,6 +229,48 @@ class _profileState extends State<profile> {
                 child: Text(
                   " 51,Dobson Road\n Howrah- 711101\n West Bengal\n India",
                   style: TextStyle(fontSize: height*0.02, fontWeight: FontWeight.bold, color: Colors.white),
+                ),
+              ),
+              SizedBox(height: height*0.024),
+              SizedBox(
+                width: width,
+                height: height*0.055,
+                child: ElevatedButton(
+                  onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context) => upcomingBookings()));},
+                  child: Text("Upcoming Bookings", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: height*0.024),),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(background2),
+
+                  ),
+                ),
+              ),
+              SizedBox(height: height*0.024),
+              SizedBox(
+                width: width,
+                height: height*0.055,
+                child: ElevatedButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => signIN()));}, child: Text("LOG OUT", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w800, fontSize: height*0.024),),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(highlight),
+
+                  ),
+                ),
+              ),
+              SizedBox(height: height*0.024),
+              SizedBox(
+                width: width,
+                height: height*0.055,
+                child: ElevatedButton(onPressed: (){Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => signIN()));}, child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.warning_rounded, color: Colors.white, size: height*0.032,) ,
+                    SizedBox(width: width*0.04,),
+                    Text("DELETE ACCOUNT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.w800, fontSize: height*0.024),),
+                  ],
+                ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStatePropertyAll(Colors.red),
+
+                  ),
                 ),
               ),
               SizedBox(height: 16.0),
