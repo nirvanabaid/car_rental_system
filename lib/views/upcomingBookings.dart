@@ -36,6 +36,7 @@ class _upcomingBookingsState extends State<upcomingBookings> {
 
                   leading: const Icon(Icons.list, color: Colors.white,),
                   trailing: GestureDetector(
+                    onTap: (){},
                     child: Container(
                       padding: EdgeInsets.all(height*0.009),
                       decoration: BoxDecoration(
